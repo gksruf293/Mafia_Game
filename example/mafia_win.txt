@@ -1,0 +1,239 @@
+(neo4j) PS D:\Mafia_Game> python .\project\game_coordinator.py
+INFO:MilvusManager:🔄 Milvus 연결 시도 중... (URI: https://in03-94ecfe20b45efc5.serverless.aws-eu-central-1.cloud.zilliz.com)
+INFO:MilvusManager:✅ Milvus 연결 성공!
+INFO:GameCoordinator:
+🛠️ 시스템 초기화 및 데이터베이스 리셋 중...
+INFO:root:✅ Neo4j 초기화 완료.
+INFO:MilvusManager:🗑️ 기존 컬렉션 'mafia_dialogue' 삭제 완료.
+INFO:MilvusManager:✅ Milvus 컬렉션 'mafia_dialogue' 초기화 및 로드 완료.
+INFO:GameCoordinator:✅ 게임 설정 완료
+INFO:GameCoordinator:
+🌙 --- DAY 1 NIGHT --- 🌙
+INFO:root:🌙 [밤의 행동] Agent_1 --KILL--> Agent_4 (결과: SUCCESS)
+INFO:root:💀 사망자 확인: Agent_4의 정체는 [시민]입니다.
+INFO:GameCoordinator:🩸 [마피아 액션] Agent_4님이 살해당했습니다.
+INFO:root:🌙 [밤의 행동] Agent_2 --INVESTIGATE--> Agent_3 (결과: 마피아)
+INFO:GameCoordinator:🔎 [경찰 액션] 조사를 마쳤습니다.
+INFO:GameCoordinator:
+☀️ --- DAY 1 DAY --- ☀️
+System_Moderator (to chat_manager):
+
+DAY 1 아침입니다. 각자 2번씩 발언하며 서로의 논리적 모순을 파헤치고 최종 투표 대상을 결정하세요.
+
+--------------------------------------------------------------------------------
+
+Next speaker: Agent_1
+
+INFO:HybridEngine:⚡ RAG 데이터 추출 시작 (요청자: Agent_1)
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:InfoExtractor:✨ 정보 추출 완료: Agent_1 -> 2건의 관계 발견
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:MilvusManager:📝 Milvus 저장: [Agent_1] 1. 저는 경찰입니다. 어젯밤에 Ag...
+Agent_1 (to chat_manager):
+
+1. 저는 경찰입니다. 어젯밤에 Agent_6을 조사했으며, 시민임을 확인했습니다.
+
+2. 현재까지 타인의 발언이나 RAG 팩트에서 명확한 모순점은 발견되지 않았습니다. 따라서 이번 발언에서는 제 조사 결과를 바탕으로  대립 구도를 형성하는 데 집중하겠습니다.
+
+3. 오늘 투표에서는 Agent_3을 지목하겠습니다. Agent_6이 시민임을 확인했으므로, 다른 에이전트들 중에서 의심을 받을 만한 대상을  찾기 위해 이 선택을 했습니다.
+
+--------------------------------------------------------------------------------
+
+Next speaker: Agent_2
+
+INFO:HybridEngine:⚡ RAG 데이터 추출 시작 (요청자: Agent_2)
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:InfoExtractor:✨ 정보 추출 완료: Agent_2 -> 4건의 관계 발견
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:MilvusManager:📝 Milvus 저장: [Agent_2] 1. 저는 경찰이며, 간밤에 Agen...
+Agent_2 (to chat_manager):
+
+1. 저는 경찰이며, 간밤에 Agent_3을 조사한 결과 그가 '마피아'임을 확인했습니다. 이는 매우 중요한 정보로, 우리의 생존에 직접적인 영향을 미칩니다.
+
+2. 현재 Agent_1이 자신이 경찰이라고 주장하며, Agent_6이 시민임을 확인했다고 했습니다. 그러나 제가 진짜 경찰이며, Agent_3이 마 피아임을 확인했으므로, Agent_1의 주장은 거짓일 가능성이 높습니다. 이는 Agent_1이 거짓 경찰일 가능성을 제기합니다.
+
+3. 오늘 투표에서는 Agent_3을 지목하겠습니다. 그가 마피아임이 확실하므로, 우리의 생존을 위해 반드시 제거해야 합니다.
+
+--------------------------------------------------------------------------------
+
+Next speaker: Agent_3
+
+INFO:HybridEngine:⚡ RAG 데이터 추출 시작 (요청자: Agent_3)
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:InfoExtractor:✨ 정보 추출 완료: Agent_3 -> 3건의 관계 발견
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:MilvusManager:📝 Milvus 저장: [Agent_3] 1. 저는 시민입니다. 경찰이 아닙니...
+Agent_3 (to chat_manager):
+
+1. 저는 시민입니다. 경찰이 아닙니다.
+
+2. 현재 Agent_1과 Agent_2가 서로 경찰이라고 주장하며 대립하고 있습니다. 이 두 명 중 한 명은 거짓말을 하고 있는 것이 분명합니다. Agent_1은 Agent_6이 시민임을 확인했다고 주장하고, Agent_2는 제가 마피아임을 확인했다고 주장합니다. 이 두 주장은 서로 상충되 며, 둘 중 하나는 거짓입니다.
+
+3. 오늘 투표에서는 Agent_2를 지목하겠습니다. Agent_2의 주장은 제가 마피아라고 했지만, 저는 시민입니다. 따라서 Agent_2의 주장이 거짓일 가능성이 높습니다. Agent_1과 Agent_2의 대립에서 Agent_2를 제거하는 것이 합리적입니다.
+
+--------------------------------------------------------------------------------
+
+Next speaker: Agent_5
+
+INFO:HybridEngine:⚡ RAG 데이터 추출 시작 (요청자: Agent_5)
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:InfoExtractor:✨ 정보 추출 완료: Agent_5 -> 3건의 관계 발견
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:MilvusManager:📝 Milvus 저장: [Agent_5] 1. 저는 제 직업을 공개하지 않겠습...
+Agent_5 (to chat_manager):
+
+1. 저는 제 직업을 공개하지 않겠습니다. 이는 전략적 이유에서 비롯된 결정입니다.
+
+2. RAG 팩트와 발언을 분석한 결과, Agent_1과 Agent_2는 서로 경찰이라고 주장하며 대립하고 있습니다. 이는 명백한 모순입니다. 둘  중 한 명은 거짓말을 하고 있습니다. Agent_2는 Agent_3이 마피아라고 주장하고, Agent_1은 Agent_6이 시민이라고 주장합니다. 이 두  주장은 서로 상충되며, 둘 중 하나는 거짓입니다. 또한, Agent_3은 자신이 시민이라고 주장하며, Agent_2의 주장을 반박하고 있습니다.
+
+3. 오늘 투표에서는 Agent_2를 지목하겠습니다. Agent_2의 주장은 Agent_3이 마피아라고 했지만, Agent_3은 자신이 시민이라고 주장하 고 있습니다. 또한, Agent_1과 Agent_2의 대립에서 Agent_2의 주장이 더 의심스럽습니다. 따라서 Agent_2를 제거하는 것이 합리적이라 고 판단합니다.
+
+--------------------------------------------------------------------------------
+
+Next speaker: Agent_6
+
+INFO:HybridEngine:⚡ RAG 데이터 추출 시작 (요청자: Agent_6)
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:InfoExtractor:✨ 정보 추출 완료: Agent_6 -> 3건의 관계 발견
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:MilvusManager:📝 Milvus 저장: [Agent_6] 1. 저는 제 직업을 공개하지 않겠습...
+Agent_6 (to chat_manager):
+
+1. 저는 제 직업을 공개하지 않겠습니다. 이는 전략적 이유에서 비롯된 결정입니다.
+
+2. 현재 Agent_1과 Agent_2가 서로 경찰이라고 주장하며 대립하고 있습니다. 이는 명백한 모순입니다. 둘 중 한 명은 거짓말을 하고 있습니다. Agent_1은 제가 시민임을 확인했다고 주장하고, Agent_2는 Agent_3이 마피아라고 주장합니다. 이 두 주장은 서로 상충되며, 둘 중 하나는 거짓입니다. 또한, Agent_3은 자신이 시민이라고 주장하며, Agent_2의 주장을 반박하고 있습니다.
+
+3. 오늘 투표에서는 Agent_2를 지목하겠습니다. Agent_2의 주장은 Agent_3이 마피아라고 했지만, Agent_3은 자신이 시민이라고 주장하 고 있습니다. 또한, Agent_1과 Agent_2의 대립에서 Agent_2의 주장이 더 의심스럽습니다. 따라서 Agent_2를 제거하는 것이 합리적이라 고 판단합니다.
+
+--------------------------------------------------------------------------------
+
+Next speaker: Agent_1
+
+INFO:HybridEngine:⚡ RAG 데이터 추출 시작 (요청자: Agent_1)
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:InfoExtractor:✨ 정보 추출 완료: Agent_1 -> 3건의 관계 발견
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:MilvusManager:📝 Milvus 저장: [Agent_1] 1. 저는 경찰입니다. 어젯밤에 Ag...
+Agent_1 (to chat_manager):
+
+1. 저는 경찰입니다. 어젯밤에 Agent_6을 조사했으며, 시민임을 확인했습니다. 이는 매우 중요한 정보입니다.
+
+2. RAG 팩트와 발언을 분석한 결과, Agent_2와 제가 서로 경찰이라고 주장하며 대립하고 있습니다. 이는 명백한 모순입니다. Agent_2는 Agent_3이 마피아라고 주장하고 있지만, Agent_3은 자신이 시민이라고 주장하고 있습니다. 또한, Agent_5와 Agent_6 모두 Agent_2의  주장이 의심스럽다고 판단하고 있습니다. 이는 Agent_2의 주장이 신뢰할 수 없음을 시사합니다.
+
+3. 오늘 투표에서는 Agent_2를 지목하겠습니다. Agent_2의 주장은 신뢰할 수 없으며, 그의 제거가 합리적이라고 판단합니다.
+
+--------------------------------------------------------------------------------
+
+Next speaker: Agent_2
+
+INFO:HybridEngine:⚡ RAG 데이터 추출 시작 (요청자: Agent_2)
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:InfoExtractor:✨ 정보 추출 완료: Agent_2 -> 3건의 관계 발견
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:MilvusManager:📝 Milvus 저장: [Agent_2] 1. 저는 경찰이며, 간밤에 Agen...
+Agent_2 (to chat_manager):
+
+1. 저는 경찰이며, 간밤에 Agent_3을 조사한 결과 그가 '마피아'임을 확인했습니다. 이는 매우 중요한 정보로, 우리의 생존에 직접적인 영향을 미칩니다.
+
+2. Agent_1은 자신이 경찰이라고 주장하며, Agent_6이 시민임을 확인했다고 했습니다. 그러나 제가 진짜 경찰이며, Agent_3이 마피아임을 확인했으므로, Agent_1의 주장은 거짓일 가능성이 높습니다. 이는 Agent_1이 거짓 경찰일 가능성을 제기합니다. 또한, Agent_3은 자신이 시민이라고 주장하지만, 이는 제가 조사한 결과와 명백히 상충됩니다. Agent_3의 주장은 신뢰할 수 없습니다.
+
+3. 오늘 투표에서는 Agent_3을 지목하겠습니다. 그가 마피아임이 확실하므로, 우리의 생존을 위해 반드시 제거해야 합니다.
+
+--------------------------------------------------------------------------------
+
+Next speaker: Agent_3
+
+INFO:HybridEngine:⚡ RAG 데이터 추출 시작 (요청자: Agent_3)
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:InfoExtractor:✨ 정보 추출 완료: Agent_3 -> 3건의 관계 발견
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:MilvusManager:📝 Milvus 저장: [Agent_3] 1. 저는 시민입니다. 경찰이 아닙니...
+Agent_3 (to chat_manager):
+
+1. 저는 시민입니다. 경찰이 아닙니다.
+
+2. 현재 Agent_1과 Agent_2가 서로 경찰이라고 주장하며 대립하고 있습니다. 이 두 명 중 한 명은 거짓말을 하고 있는 것이 분명합니다. Agent_1은 Agent_6이 시민임을 확인했다고 주장하고, Agent_2는 제가 마피아임을 확인했다고 주장합니다. 이 두 주장은 서로 상충되 며, 둘 중 하나는 거짓입니다.
+
+3. 오늘 투표에서는 Agent_2를 지목하겠습니다. Agent_2의 주장은 제가 마피아라고 했지만, 저는 시민입니다. 따라서 Agent_2의 주장이 거짓일 가능성이 높습니다. Agent_1과 Agent_2의 대립에서 Agent_2를 제거하는 것이 합리적입니다.
+
+--------------------------------------------------------------------------------
+
+Next speaker: Agent_5
+
+INFO:HybridEngine:⚡ RAG 데이터 추출 시작 (요청자: Agent_5)
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:InfoExtractor:✨ 정보 추출 완료: Agent_5 -> 3건의 관계 발견
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:MilvusManager:📝 Milvus 저장: [Agent_5] 1. 저는 여전히 제 직업을 공개하지...
+Agent_5 (to chat_manager):
+
+1. 저는 여전히 제 직업을 공개하지 않겠습니다. 이는 전략적 이유에서 비롯된 결정입니다.
+
+2. 새로운 모순점:
+   - Agent_2는 자신이 경찰이라고 주장하며 Agent_3이 마피아라고 했습니다. 그러나 Agent_3은 자신이 시민이라고 주장하고 있습니다. 이 두 주장은 서로 상충됩니다.
+   - Agent_1과 Agent_2는 서로 경찰이라고 주장하며 대립하고 있습니다. 이는 명백한 모순입니다. 둘 중 한 명은 거짓말을 하고 있습 니다.
+   - Agent_1은 Agent_6이 시민임을 확인했다고 주장합니다. 이는 Agent_2의 주장과는 직접적인 연관이 없습니다. 따라서 Agent_1의 주장은 현재로서는 반박할 근거가 부족합니다.
+
+3. 오늘 투표에서는 Agent_2를 지목하겠습니다. Agent_2의 주장은 Agent_3이 마피아라고 했지만, Agent_3은 자신이 시민이라고 주장하 고 있습니다. 또한, Agent_1과 Agent_2의 대립에서 Agent_2의 주장이 더 의심스럽습니다. 따라서 Agent_2를 제거하는 것이 합리적이라 고 판단합니다.
+
+--------------------------------------------------------------------------------
+
+Next speaker: Agent_6
+
+INFO:HybridEngine:⚡ RAG 데이터 추출 시작 (요청자: Agent_6)
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:InfoExtractor:✨ 정보 추출 완료: Agent_6 -> 3건의 관계 발견
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:MilvusManager:📝 Milvus 저장: [Agent_6] 1. 저는 제 직업을 공개하지 않겠습...
+Agent_6 (to chat_manager):
+
+1. 저는 제 직업을 공개하지 않겠습니다. 이는 전략적 이유에서 비롯된 결정입니다.
+
+2. 새로운 모순점:
+   - Agent_1과 Agent_2는 서로 경찰이라고 주장하며 대립하고 있습니다. 이는 명백한 모순입니다. 둘 중 한 명은 거짓말을 하고 있습 니다.
+   - Agent_2는 Agent_3이 마피아라고 주장하지만, Agent_3은 자신이 시민이라고 주장하고 있습니다. 이는 상충되는 정보입니다.      
+   - Agent_1은 제가 시민임을 확인했다고 주장합니다. 이는 Agent_2의 주장과는 직접적인 연관이 없습니다. 따라서 Agent_1의 주장은 현재로서는 반박할 근거가 부족합니다.
+
+3. 오늘 투표에서는 Agent_2를 지목하겠습니다. Agent_2의 주장은 Agent_3이 마피아라고 했지만, Agent_3은 자신이 시민이라고 주장하 고 있습니다. 또한, Agent_1과 Agent_2의 대립에서 Agent_2의 주장이 더 의심스럽습니다. 따라서 Agent_2를 제거하는 것이 합리적이라 고 판단합니다.
+
+--------------------------------------------------------------------------------
+
+>>>>>>>> TERMINATING RUN (51dac672-d09c-411b-96e5-c8099894c651): Maximum rounds (11) reached
+INFO:GameCoordinator:
+🗳️ --- DAY 1 VOTE --- 🗳️
+INFO:root:🗳 [투표] Agent_1 -> Agent_2 (턴: 1)
+INFO:GameCoordinator:   - 🎯 Agent_1 -> [Agent_2] 투표
+INFO:root:🗳 [투표] Agent_2 -> Agent_3 (턴: 1)
+INFO:GameCoordinator:   - 🎯 Agent_2 -> [Agent_3] 투표
+INFO:root:🗳 [투표] Agent_3 -> Agent_2 (턴: 1)
+INFO:GameCoordinator:   - 🎯 Agent_3 -> [Agent_2] 투표
+INFO:root:🗳 [투표] Agent_5 -> Agent_2 (턴: 1)
+INFO:GameCoordinator:   - 🎯 Agent_5 -> [Agent_2] 투표
+INFO:root:🗳 [투표] Agent_6 -> Agent_3 (턴: 1)
+INFO:GameCoordinator:   - 🎯 Agent_6 -> [Agent_3] 투표
+INFO:GameCoordinator:
+⚖️ [투표 결과] Agent_2 처형 (실제 직업: 경찰)
+INFO:root:💀 사망자 확인: Agent_2의 정체는 [경찰]입니다.
+WARNING:root:🚨 [논리 확정] Agent_1는 가짜임이 밝혀졌습니다!
+INFO:GameCoordinator:
+💀 마피아 수가 같거나 많음! 마피아팀 승리!
