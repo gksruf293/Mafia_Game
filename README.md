@@ -1,50 +1,52 @@
 # 🕵️‍♂️ Graph-RAG 기반 다자간 논리 추론 및 사회적 상호작용 프레임워크
-> **Multi-Agent Logical Reasoning & Social Interaction Framework powered by Graph-RAG**
+> **Hybrid-RAG Approach to Multi-Agent Social Deduction Game**
 
-본 프로젝트는 **AutoGen** 에이전트 환경 내에서 **Neo4j(Graph)**와 **Milvus(Vector)**를 결합한 **Hybrid RAG** 엔진을 통해, 고도의 전략적 판단과 논리적 추론이 요구되는 마피아 게임 시나리오를 시뮬레이션합니다.
-
-
+본 프로젝트는 마피아 게임이라는 극한의 정보 불균형 상황에서, **Neo4j의 그래프 구조**를 활용해 에이전트가 어떻게 **논리적 모순을 탐지**하고 **팀을 식별**하는지를 연구하기 위한 프레임워크입니다.
 
 ---
 
-## 🚀 Key Features
+## 🎮 Logic & Game Flow
 
-### 1. Hybrid RAG Engine (Module C)
-- **Text-to-Cypher:** 자연어 쿼리를 Cypher 문으로 변환하여 Neo4j의 정형화된 논리 팩트 추출.
-- **Vector Search:** Milvus를 활용하여 발언의 맥락과 감정적 정황 증거를 `COSINE` 유사도 기반으로 검색.
-- **Context Fusion:** 그래프의 관계 데이터와 벡터의 비정형 데이터를 결합하여 에이전트에게 최적화된 추론 근거 제공.
+본 프레임워크는 불필요한 사회적 대화(말투, 감정 호소 등)를 배제하고, 오직 **데이터와 논리 팩트**에 기반하여 진행됩니다.
 
-### 2. Graph-based Logical Reasoning (Module A & D)
-- **Real-time Contradiction Detection:** `:CLAIMED_ROLE` 관계를 통해 에이전트 간 역할 주장의 모순을 실시간 추적.
-- **Social Graph Modeling:** `:KNOWS_PARTNER`, `:VOTED_FOR`, `:SUSPECTS` 등의 관계를 통해 동적인 사회적 상호작용 기록.
-- **Strategic Deception:** 마피아 에이전트가 특정 역할을 사칭하거나 파트너와 정보를 공유하는 전략적 초기화 로직 반영.
+### 1. 승리 조건
+- **마피아 팀:** 생존한 시민 팀의 직업을 모두 맞추거나, 마피아 수가 시민 수보다 같거나 많아질 때.
+- **시민 팀:** 모든 마피아를 색출하여 추방 또는 처단할 때.
 
-### 3. Dynamic Multi-Agent Orchestration (Module D)
-- **8-Player Environment:** 마피아(2), 경찰(1), 의사(1), 시민(4)의 동적 역할 할당 및 관리.
-- **Agentic Workflow:** AutoGen을 기반으로 한 에이전트 간 자율 토론 및 의사결정 프로세스.
+### 2. 핵심 역할 로직
+- **경찰 (Police):** 매일 밤 무작위 에이전트의 실제 직업을 시스템으로부터 전달받습니다.
+- **마피아 (Mafia):** 매일 밤 제거할 에이전트를 결정하며, 전략적으로 아군 정보를 공유합니다.
+- **전략적 사칭:** 첫날 아침, 반드시 **진짜 경찰** 혹은 **사칭 경찰(마피아)** 중 최소 한 명은 자신의 신분을 공개하며 논리 싸움을 시작해야 합니다.
 
 ---
 
-## 🛠 Tech Stack
+## 🧠 Graph-RAG 논리 엔진
 
-| Category | Technology |
-| :--- | :--- |
-| **Agent Framework** | `AutoGen` |
-| **Graph Database** | `Neo4j` (Cypher Query Language) |
-| **Vector Database** | `Milvus` / `Zilliz` |
-| **LLM & Embedding** | `OpenAI GPT-4o`, `text-embedding-3-small` |
-| **Language** | `Python 3.10+` |
+본 프로젝트의 핵심은 각 대화 직후 **Neo4j**를 사용하여 실시간으로 사회적 관계망을 재구성하는 것입니다.
+
+### 1. 팀 가르기 및 대립 로직 (Conflict Search)
+단순한 텍스트 검색(Vector)이 아닌, 그래프의 연결 관계를 통해 "팀"을 판별합니다.
+
+- **Conflict Generation:** 두 명 이상의 에이전트가 동일한 고유 역할(예: 경찰)을 주장할 경우, 시스템은 이들 사이에 `[:CONFLICTS_WITH]` 관계를 생성합니다.
+- **Logic:** $A$와 $B$가 대립할 때, 한 명이 시민으로 확정되면 나머지 한 명은 **논리적 확정 마피아**가 됩니다.
+
+
+
+### 2. 사망 데이터를 통한 역추론 (Post-Mortem Inference)
+밤 사이 발생한 사망자의 실제 직업이 공개되면, 그래프는 연쇄적으로 업데이트됩니다.
+
+1. **Status Update:** 사망자 $X$에게 `[:CONFIRMED_STATUS {type: 'CITIZEN'}]` 부여.
+2. **Back-propagation:** - 과거에 $X$를 마피아로 몰았던 에이전트들의 신뢰도 하락.
+   - $X$와 대립 관계(`:CONFLICTS_WITH`)에 있던 생존 에이전트는 즉시 **마피아**로 식별.
 
 ---
 
-## 🏗 System Architecture
+## 🛠 Database Schema & RAG Process
 
-### Knowledge Graph Schema (Neo4j)
-
-
+### Neo4j Graph Schema
 ```cypher
-// 핵심 관계 구조 예시
-(Agent)-[:CLAIMED_ROLE]->(Role)
-(Mafia)-[:KNOWS_PARTNER]->(Mafia)
-(Agent)-[:VOTED_FOR {round: 1}]->(Agent)
-(Agent)-[:SAID {context_id: "..."}]->(Statement)
+// 에이전트 주장 및 대립 구조
+(Agent)-[:CLAIMS_ROLE]->(Role)
+(Agent)-[:ACCUSES]->(Agent)
+(Agent)-[:CONFLICTS_WITH]-(Agent)
+(Agent)-[:CONFIRMED_STATUS]->(Status)
