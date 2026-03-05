@@ -64,3 +64,13 @@ NEO4J_USER=neo4j
 NEO4J_PWD=password
 MILVUS_ENDPOINT=https://your-milvus-endpoint
 MILVUS_TOKEN=your-token
+```
+
+### 2) 패키지 설치
+```
+pip install pyautogen pymilvus neo4j python-dotenv openai
+```
+### 3) 엔진 가동
+```
+python project/game_coordinator.py
+```
